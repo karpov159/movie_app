@@ -1,5 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
-import { Homepage } from '../../pages';
+import { Homepage, PreviewPage } from '../../pages';
 import {
 	BASE,
 	MOVIES,
@@ -12,6 +12,7 @@ const AppRoutes = () => {
 	return (
 		<Routes>
 			<Route path={BASE} element={<Homepage />}>
+				<Route path={BASE} element={<PreviewPage />} />
 				<Route
 					path={MOVIES}
 					element={<h1 style={{ color: '#fff' }}>MOVIES</h1>}

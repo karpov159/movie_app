@@ -1,0 +1,21 @@
+@import '../../style/variables.scss';
+
+.preview-page {
+	padding: 50px;
+	height: 100%;
+	width: 100%;
+	border-left: $border-color;
+	&__headline {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+	&__movies {
+		margin-top: 20px;
+		display: grid;
+		grid-template-columns: repeat(auto-fit, 350px);
+		grid-auto-rows: 250px;
+		row-gap: 30px;
+		justify-content: space-between;
+	}
+}

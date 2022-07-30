@@ -1,0 +1,286 @@
+.movie {
+	position: relative;
+	width: 350px;
+	height: 250px;
+
+	&__preview {
+		width: 100%;
+		height: 100%;
+		cursor: pointer;
+		transition: 0.3s all;
+		border-radius: 15px;
+		position: relative;
+
+		&:hover {
+			box-shadow: 0px 0px 15px rgb(255, 255, 255);
+		}
+
+		&-img {
+			width: 100%;
+			height: 100%;
+			border-radius: 15px;
+			object-fit: cover;
+			position: relative;
+			z-index: 0;
+		}
+
+		&-menu {
+			position: absolute;
+			padding: 15px 20px;
+			bottom: 0;
+			left: 0;
+			height: 30%;
+			display: flex;
+			justify-content: space-between;
+			backdrop-filter: blur(15px);
+			width: 100%;
+			border-radius: 15px;
+			align-items: center;
+
+			hr {
+				filter: blur(0.7px);
+				width: 1px;
+				height: 100%;
+				border: none;
+				background-color: #fff;
+				margin-right: 10px;
+			}
+		}
+
+		&-btn {
+			width: 30px;
+			height: 30px;
+			border-radius: 100%;
+			border: none;
+			background-color: rgba(255, 255, 255, 0);
+			position: relative;
+			transition: 0.3s all;
+			cursor: pointer;
+			&:hover {
+				box-shadow: 0px 0px 5px rgb(255, 255, 255);
+			}
+		}
+
+		&-play {
+			width: 100%;
+			height: 100%;
+			background-color: gray;
+			border-radius: 100%;
+			position: absolute;
+			top: 0;
+			left: 0;
+			transition: 0.3s all;
+			z-index: -2;
+
+			&:hover {
+				box-shadow: 0px 0px 5px rgb(255, 255, 255);
+			}
+
+			svg {
+				position: absolute;
+				fill: #fff;
+				width: 15px;
+				height: 15px;
+				left: 7.5px;
+				top: 7.5px;
+				path {
+					position: relative;
+				}
+			}
+		}
+
+		&-title {
+			color: #fff;
+			font-size: 13px;
+			font-weight: 500;
+			text-align: center;
+		}
+
+		&-genre {
+			color: rgba(255, 255, 255, 0.466);
+			font-size: 11px;
+			text-align: center;
+		}
+
+		&-name {
+			width: 200px;
+		}
+
+		&-rating {
+			display: flex;
+			align-items: center;
+			width: 40px;
+		}
+
+		&-rate {
+			color: #fff;
+			font-size: 12px;
+			margin-left: 7px;
+		}
+
+		&-star {
+			text-align: center;
+			width: 14px;
+			height: 14px;
+			display: flex;
+			text-align: center;
+			justify-content: center;
+			svg {
+				fill: #fff;
+				width: 100%;
+				height: 100%;
+			}
+		}
+	}
+	&__overview {
+		position: fixed;
+		visibility: hidden;
+		opacity: 0;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background-color: rgba(0, 0, 0, 0.5);
+		z-index: 10;
+		transition: 0.3s all;
+
+		&-close {
+			font-size: 50px;
+			color: #fff;
+			font-weight: 500;
+			position: absolute;
+			top: 0;
+			right: 20px;
+			cursor: pointer;
+		}
+
+		&-wrapper {
+			width: 1000px;
+			height: 100vh;
+			margin: 0 auto;
+			position: relative;
+			background-color: #000;
+			z-index: 1;
+			overflow: auto;
+
+			&::-webkit-scrollbar {
+				display: none;
+			}
+		}
+
+		&-title {
+			color: #fff;
+			font-weight: 700;
+			font-size: 25px;
+		}
+
+		&-descr {
+			margin-top: 40px;
+			color: rgb(187, 184, 184);
+			font-size: 22px;
+			font-weight: 500;
+		}
+
+		&-img {
+			width: 1000px;
+			height: 600px;
+			box-shadow: inset 0 -100px 70px -30px rgba(0, 0, 0, 0.9);
+			img {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+				position: relative;
+				z-index: -2;
+			}
+		}
+
+		&-btns {
+			margin-top: 80px;
+			width: 270px;
+			display: flex;
+			justify-content: space-between;
+			text-align: center;
+			margin-bottom: 10px;
+		}
+
+		&-play {
+			width: 120px;
+			height: 40px;
+			border: none;
+			background-color: #fff;
+			cursor: pointer;
+			font-size: 18px;
+			font-weight: 700;
+			line-height: 20px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			padding: 10px;
+			transition: 0.3s all;
+
+			&:hover {
+				box-shadow: 0px 0px 5px rgb(255, 255, 255);
+			}
+			svg {
+				width: 15px;
+				height: 15px;
+				margin-right: 5px;
+			}
+		}
+
+		&-add {
+			width: 140px;
+			height: 40px;
+			border: none;
+			background-color: rgba(128, 128, 128, 0.37);
+			cursor: pointer;
+			font-size: 18px;
+			font-weight: 500;
+			line-height: 20px;
+			color: #fff;
+			padding: 10px;
+			transition: 0.3s all;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+
+			&:hover {
+				box-shadow: 0px 0px 5px rgb(255, 255, 255);
+			}
+			svg {
+				width: 20px;
+				height: 20px;
+				margin-right: 5px;
+				fill: #fff;
+			}
+		}
+
+		&-rating {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			width: 120px;
+			margin-top: 10px;
+		}
+
+		&-date,
+		&-rate {
+			color: rgb(187, 184, 184);
+			font-size: 20px;
+			font-weight: 500;
+		}
+
+		&-star {
+			width: 20px;
+			height: 20px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			svg {
+				width: 100%;
+				height: 100%;
+				fill: #fff;
+			}
+		}
+	}
+}

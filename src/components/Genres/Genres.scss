@@ -1,0 +1,28 @@
+.genres {
+	grid-column: 1/2;
+	padding: 50px 100px 0 50px;
+	&__genre {
+		background-color: rgb(136, 136, 142);
+		border: none;
+		min-width: 70px;
+		height: 40px;
+		border-radius: 20px;
+		color: #fff;
+		font-weight: 500;
+		font-size: 16px;
+		padding: 10px 20px;
+		cursor: pointer;
+		margin: 20px 20px 0 0;
+		transition: 0.3s all;
+		&:hover {
+			box-shadow: 0px 0px 10px #fff;
+		}
+		&-active {
+			box-shadow: 0px 0px 10px #fff;
+		}
+	}
+	&__list {
+		display: flex;
+		flex-wrap: wrap;
+	}
+}
