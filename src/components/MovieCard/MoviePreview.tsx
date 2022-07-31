@@ -1,23 +1,25 @@
 interface MoviePreviewValues {
 	title: string;
-	backdrop_path: string;
+	poster_path: string;
 	genres: string[];
 	vote_average: number;
+	handleClick: (boolean: boolean) => void;
 }
 
 const MoviePreview = ({
 	title,
-	backdrop_path,
+	poster_path,
 	genres,
 	vote_average,
+	handleClick,
 }: MoviePreviewValues) => {
 	const imgPath = 'https://image.tmdb.org/t/p/w1280';
 
 	return (
-		<div className='movie__preview'>
+		<div onClick={() => handleClick(true)} className='movie__preview'>
 			<img
-				src={imgPath + backdrop_path}
-				alt=''
+				src={imgPath + poster_path}
+				alt={title}
 				className='movie__preview-img'
 			/>
 			<div className='movie__preview-menu'>

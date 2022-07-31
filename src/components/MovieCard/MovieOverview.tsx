@@ -1,26 +1,53 @@
+import { ChangeEvent, useEffect, useRef } from 'react';
+
 interface MovieOverviewValues {
 	title: string;
-	poster_path: string;
+	backdrop_path: string;
 	vote_average: number;
 	release_date: string;
 	overview: string;
+	handleClick: (boolean: boolean) => void;
 }
 
 const MovieOverview = ({
-	poster_path,
+	backdrop_path,
 	title,
 	vote_average,
 	release_date,
 	overview,
+	handleClick,
 }: MovieOverviewValues) => {
 	const imgPath = 'https://image.tmdb.org/t/p/w1280';
+	const overlay = useRef<HTMLDivElement>(null);
+
+	useEffect(() => {
+		const clickListener = (e: MouseEvent) => {
+			const target = e.target as HTMLElement;
+
+			if (
+				overlay.current &&
+				target.classList.contains('movie__overview')
+			) {
+				handleClick(false);
+			}
+		};
+
+		document.addEventListener('click', clickListener);
+		return () => {
+			document.removeEventListener('click', clickListener);
+		};
+	}, [overlay, handleClick]);
 
 	return (
-		<div className='movie__overview'>
+		<div ref={overlay} className='movie__overview'>
 			<div className='movie__overview-wrapper'>
-				<div className='movie__overview-close'>&times;</div>
+				<div
+					onClick={() => handleClick(false)}
+					className='movie__overview-close'>
+					&times;
+				</div>
 				<div className='movie__overview-img'>
-					<img src={imgPath + poster_path} alt={title} />
+					<img src={imgPath + backdrop_path} alt={title} />
 				</div>
 				<div className='movie__overview-title'>{title}</div>
 				<div className='movie__overview-rating'>

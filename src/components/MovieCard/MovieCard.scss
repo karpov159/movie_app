@@ -81,7 +81,7 @@
 				fill: #fff;
 				width: 15px;
 				height: 15px;
-				left: 7.5px;
+				left: 8.5px;
 				top: 7.5px;
 				path {
 					position: relative;
@@ -134,8 +134,6 @@
 	}
 	&__overview {
 		position: fixed;
-		visibility: hidden;
-		opacity: 0;
 		top: 0;
 		left: 0;
 		width: 100%;
@@ -259,7 +257,7 @@
 			display: flex;
 			justify-content: space-between;
 			align-items: center;
-			width: 120px;
+			width: 180px;
 			margin-top: 10px;
 		}
 

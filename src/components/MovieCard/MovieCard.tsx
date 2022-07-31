@@ -20,6 +20,15 @@ const MovieCard = ({
 		(state) => state.movies.genresData
 	);
 
+	const handleClick = (boolean: boolean) => {
+		setOpenedOverview(boolean);
+		if (boolean) {
+			document.body.style.overflow = 'hidden';
+		} else {
+			document.body.style.overflow = '';
+		}
+	};
+
 	const genres = genre_ids.map((num: number, i: number) => {
 		if (genre_ids.length === i + 1) {
 			return genresData[num];
@@ -30,7 +39,8 @@ const MovieCard = ({
 	return (
 		<div className='movie'>
 			<MoviePreview
-				backdrop_path={backdrop_path}
+				handleClick={handleClick}
+				poster_path={poster_path}
 				title={title}
 				genres={genres}
 				vote_average={vote_average}
@@ -38,7 +48,8 @@ const MovieCard = ({
 
 			{isOpenedOverview ? (
 				<MovieOverview
-					poster_path={poster_path}
+					handleClick={handleClick}
+					backdrop_path={backdrop_path}
 					release_date={release_date}
 					overview={overview}
 					title={title}
