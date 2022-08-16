@@ -1,4 +1,4 @@
 import Homepage from './Homepage/Homepage';
-import PreviewPage from './PreviewPage/PreviewPage';
+import ContentPage from './ContentPage/ContentPage';
 
-export { Homepage, PreviewPage };
+export { Homepage, ContentPage };

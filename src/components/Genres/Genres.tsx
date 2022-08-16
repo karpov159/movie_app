@@ -1,19 +1,50 @@
+import {
+	setActiveGenre,
+	changeCurrentPage,
+} from '../../core/store/MoviesSlice';
+import { useAppDispatch, useAppSelector } from '../../core/store';
+import Genre from './Genre';
 import Typography from '../../shared/Typography/Typography';
+import getRandomColor from '../../helpers/getRandomColor';
 
 import './Genres.scss';
 
 const Genres = () => {
+	const dispatch = useAppDispatch();
+	const genresData: Record<number, string> = useAppSelector(
+		(state) => state.movies.genresData
+	);
+
+	const handleClick = (name: string, num: string) => {
+		dispatch(setActiveGenre({ name, num }));
+		dispatch(changeCurrentPage(1));
+	};
+
+	const createButtons = (genres: Record<number, string>) => {
+		const arr = [];
+
+		for (let key in genres) {
+			const genre = (
+				<Genre
+					key={key}
+					genre={genresData[key]}
+					color={getRandomColor()}
+					handleClick={() => handleClick(genres[key], key)}
+				/>
+			);
+
+			arr.push(genre);
+		}
+
+		return arr;
+	};
+
+	const genresButtons = createButtons(genresData);
+
 	return (
 		<div className='genres'>
-			<Typography component='h2' children='Favorite genres' />
-			<div className='genres__list'>
-				<button className='genres__genre'>Action</button>
-				<button className='genres__genre'>Western</button>
-				<button className='genres__genre'>Adventure</button>
-				<button className='genres__genre'>Drama</button>
-				<button className='genres__genre'>Comedy</button>
-				<button className='genres__genre'>Science Fiction</button>
-			</div>
+			<Typography component='h2' children='All genres' />
+			<div className='genres__list'>{genresButtons}</div>
 		</div>
 	);
 };

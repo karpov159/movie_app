@@ -1,4 +1,5 @@
-import { ChangeEvent, useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
+import { IMG_PATH } from '../../helpers/constants';
 
 interface MovieOverviewValues {
 	title: string;
@@ -17,7 +18,6 @@ const MovieOverview = ({
 	overview,
 	handleClick,
 }: MovieOverviewValues) => {
-	const imgPath = 'https://image.tmdb.org/t/p/w1280';
 	const overlay = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
@@ -33,6 +33,7 @@ const MovieOverview = ({
 		};
 
 		document.addEventListener('click', clickListener);
+
 		return () => {
 			document.removeEventListener('click', clickListener);
 		};
@@ -46,10 +47,13 @@ const MovieOverview = ({
 					className='movie__overview-close'>
 					&times;
 				</div>
+
 				<div className='movie__overview-img'>
-					<img src={imgPath + backdrop_path} alt={title} />
+					<img src={IMG_PATH + backdrop_path} alt={title} />
 				</div>
+
 				<div className='movie__overview-title'>{title}</div>
+
 				<div className='movie__overview-rating'>
 					<a href='#' className='movie__overview-star'>
 						<svg
@@ -59,9 +63,12 @@ const MovieOverview = ({
 						</svg>
 					</a>
 					<div className='movie__overview-rate'>{vote_average}</div>
+
 					<div className='movie__overview-date'>{release_date}</div>
 				</div>
+
 				<div className='movie__overview-descr'>{overview}</div>
+
 				<div className='movie__overview-btns'>
 					<button className='movie__overview-play'>
 						<svg
@@ -71,6 +78,7 @@ const MovieOverview = ({
 						</svg>
 						Play
 					</button>
+
 					<button className='movie__overview-add'>
 						<svg
 							xmlns='http://www.w3.org/2000/svg'

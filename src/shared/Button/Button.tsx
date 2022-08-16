@@ -3,11 +3,12 @@ import './Button.scss';
 interface ButtonValues {
 	buttonClass: string;
 	children: string;
+	handleClick?: () => void;
 }
 
-const Button = ({ buttonClass, children }: ButtonValues) => {
+const Button = ({ buttonClass, children, handleClick }: ButtonValues) => {
 	return (
-		<button className={buttonClass} type='button'>
+		<button onClick={handleClick} className={buttonClass} type='button'>
 			{children}
 		</button>
 	);

@@ -22,6 +22,7 @@ const MovieCard = ({
 
 	const handleClick = (boolean: boolean) => {
 		setOpenedOverview(boolean);
+
 		if (boolean) {
 			document.body.style.overflow = 'hidden';
 		} else {
@@ -33,6 +34,7 @@ const MovieCard = ({
 		if (genre_ids.length === i + 1) {
 			return genresData[num];
 		}
+
 		return genresData[num] + ' / ';
 	});
 

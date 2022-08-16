@@ -1,4 +1,4 @@
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import {
 	BASE,
 	MOVIES,
@@ -7,40 +7,79 @@ import {
 	ACTORS,
 } from '../../core/config/RoutesConfig';
 import { ProfileIcon, SearchIcon, NotifyIcon } from '../Icons';
+import { useAppDispatch, useAppSelector } from '../../core/store';
+import {
+	setActiveGenre,
+	changeCurrentPage,
+	changeCurrentTab,
+} from '../../core/store/MoviesSlice';
 
 import logo from '../../assets/logo.svg';
 import './Header.scss';
 
+interface Tabs {
+	name: string;
+	path: string;
+}
+
 const Header = () => {
-	const navigate = useNavigate();
+	const dispatch = useAppDispatch();
+	const currentTab = useAppSelector((state) => state.movies.currentTab);
+
+	const handleClick = (tabName: string) => {
+		dispatch(setActiveGenre({ name: '', num: null }));
+		dispatch(changeCurrentPage(1));
+		dispatch(changeCurrentTab(tabName));
+	};
+
+	const tabsData: Tabs[] = [
+		{
+			name: 'Movies',
+			path: MOVIES.PATH,
+		},
+		{
+			name: 'TV shows',
+			path: TVSHOWS.PATH,
+		},
+		{
+			name: 'Animations',
+			path: ANIMATIONS.PATH,
+		},
+		{
+			name: 'Actors',
+			path: ACTORS.PATH,
+		},
+	];
+
+	const createTabs = (tabs: Tabs[]) => {
+		return tabs.map((tab) => {
+			const classes =
+				currentTab === tab.name
+					? 'header__link header__link_active'
+					: 'header__link';
+
+			return (
+				<div className={classes}>
+					<NavLink
+						onClick={() => handleClick(tab.name)}
+						end
+						to={tab.path}>
+						{tab.name}
+					</NavLink>
+				</div>
+			);
+		});
+	};
+
+	const tabs = createTabs(tabsData);
+
 	return (
 		<header className='header'>
-			<NavLink end to={BASE}>
+			<NavLink onClick={() => handleClick('')} end to={BASE.PATH}>
 				<img className='header__logo' src={logo} alt='logo' />
 			</NavLink>
 
-			<div className='header__menu'>
-				<div className='header__link'>
-					<NavLink end to={MOVIES}>
-						Movies
-					</NavLink>
-				</div>
-				<div className='header__link'>
-					<NavLink end to={TVSHOWS}>
-						TV shows
-					</NavLink>
-				</div>
-				<div className='header__link'>
-					<NavLink end to={ANIMATIONS}>
-						Animations
-					</NavLink>
-				</div>
-				<div className='header__link'>
-					<NavLink end to={ACTORS}>
-						Actors
-					</NavLink>
-				</div>
-			</div>
+			<div className='header__menu'>{tabs}</div>
 
 			<div className='header__options'>
 				<div className='header__option header__option-search'>

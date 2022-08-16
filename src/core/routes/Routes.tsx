@@ -1,5 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
-import { Homepage, PreviewPage } from '../../pages';
+import { Homepage, ContentPage } from '../../pages';
 import {
 	BASE,
 	MOVIES,
@@ -11,24 +11,44 @@ import {
 const AppRoutes = () => {
 	return (
 		<Routes>
-			<Route path={BASE} element={<Homepage />}>
-				<Route path={BASE} element={<PreviewPage />} />
+			<Route path={BASE.PATH} element={<Homepage />}>
 				<Route
-					path={MOVIES}
-					element={<h1 style={{ color: '#fff' }}>MOVIES</h1>}
+					path={BASE.PATH}
+					element={
+						<ContentPage
+							title={BASE.TITLE}
+							directory={BASE.DIRECTORY}
+						/>
+					}
 				/>
 				<Route
-					path={TVSHOWS}
-					element={<h1 style={{ color: '#fff' }}>TVSHOWS</h1>}
+					path={MOVIES.PATH}
+					element={
+						<ContentPage
+							title={MOVIES.TITLE}
+							directory={MOVIES.DIRECTORY}
+						/>
+					}
 				/>
 				<Route
-					path={ANIMATIONS}
-					element={<h1 style={{ color: '#fff' }}>ANIMATIONS</h1>}
+					path={TVSHOWS.PATH}
+					element={
+						<ContentPage
+							title={TVSHOWS.TITLE}
+							directory={TVSHOWS.DIRECTORY}
+						/>
+					}
 				/>
 				<Route
-					path={ACTORS}
-					element={<h1 style={{ color: '#fff' }}>ACTORS</h1>}
+					path={ANIMATIONS.PATH}
+					element={
+						<ContentPage
+							title={ANIMATIONS.TITLE}
+							directory={ANIMATIONS.DIRECTORY}
+						/>
+					}
 				/>
+				<Route path={ACTORS.PATH} element={<h1>ACTORS</h1>} />
 			</Route>
 		</Routes>
 	);

@@ -1,3 +1,5 @@
+import { IMG_PATH } from '../../helpers/constants';
+
 interface MoviePreviewValues {
 	title: string;
 	poster_path: string;
@@ -13,15 +15,14 @@ const MoviePreview = ({
 	vote_average,
 	handleClick,
 }: MoviePreviewValues) => {
-	const imgPath = 'https://image.tmdb.org/t/p/w1280';
-
 	return (
 		<div onClick={() => handleClick(true)} className='movie__preview'>
 			<img
-				src={imgPath + poster_path}
+				src={IMG_PATH + poster_path}
 				alt={title}
 				className='movie__preview-img'
 			/>
+
 			<div className='movie__preview-menu'>
 				<button className='movie__preview-btn'>
 					<a href='#' className='movie__preview-play'>
@@ -37,7 +38,9 @@ const MoviePreview = ({
 					<div className='movie__preview-title'>{title}</div>
 					<div className='movie__preview-genre'>{genres}</div>
 				</div>
+
 				<hr />
+
 				<div className='movie__preview-rating'>
 					<a href='#' className='movie__preview-star'>
 						<svg

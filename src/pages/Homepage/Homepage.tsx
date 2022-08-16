@@ -7,9 +7,10 @@ import Genres from '../../components/Genres/Genres';
 
 const Homepage = () => {
 	const dispatch = useAppDispatch();
+	const genresDirectory = 'genre/movie/list?sort_by=popularity.desc&';
 
 	useEffect(() => {
-		dispatch(fetchGenres()).then((res) => {
+		dispatch(fetchGenres(genresDirectory)).then((res) => {
 			const genresObj: Record<number, string> = {};
 			const genres = res.payload.genres;
 
