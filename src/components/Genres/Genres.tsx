@@ -1,6 +1,7 @@
 import {
 	setActiveGenre,
 	changeCurrentPage,
+	changeSearchField,
 } from '../../core/store/MoviesSlice';
 import { useAppDispatch, useAppSelector } from '../../core/store';
 import Genre from './Genre';
@@ -18,6 +19,7 @@ const Genres = () => {
 	const handleClick = (name: string, num: string) => {
 		dispatch(setActiveGenre({ name, num }));
 		dispatch(changeCurrentPage(1));
+		dispatch(changeSearchField(''));
 	};
 
 	const createButtons = (genres: Record<number, string>) => {

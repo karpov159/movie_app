@@ -6,6 +6,7 @@ interface MoviePreviewValues {
 	genres: string[];
 	vote_average: number;
 	handleClick: (boolean: boolean) => void;
+	name?: string;
 }
 
 const MoviePreview = ({
@@ -14,6 +15,7 @@ const MoviePreview = ({
 	genres,
 	vote_average,
 	handleClick,
+	name,
 }: MoviePreviewValues) => {
 	return (
 		<div onClick={() => handleClick(true)} className='movie__preview'>
@@ -35,7 +37,7 @@ const MoviePreview = ({
 				</button>
 
 				<div className='movie__preview-name'>
-					<div className='movie__preview-title'>{title}</div>
+					<div className='movie__preview-title'>{title || name}</div>
 					<div className='movie__preview-genre'>{genres}</div>
 				</div>
 

@@ -19,6 +19,7 @@ const initialState = moviesAdapter.getInitialState({
 	},
 	currentPage: 1,
 	currentTab: '',
+	searchField: '',
 });
 
 export const fetchMovies = createAsyncThunk(
@@ -63,6 +64,9 @@ const moviesSlice = createSlice({
 		changeCurrentTab(state: any, action: PayloadAction<string>) {
 			state.currentTab = action.payload;
 		},
+		changeSearchField(state: any, action: PayloadAction<string>) {
+			state.searchField = action.payload;
+		},
 	},
 	extraReducers: (builder) => {
 		builder
@@ -93,4 +97,5 @@ export const {
 	setActiveGenre,
 	changeCurrentPage,
 	changeCurrentTab,
+	changeSearchField,
 } = actions;

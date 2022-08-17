@@ -12,7 +12,9 @@ import {
 	setActiveGenre,
 	changeCurrentPage,
 	changeCurrentTab,
+	changeSearchField,
 } from '../../core/store/MoviesSlice';
+import { ChangeEvent } from 'react';
 
 import logo from '../../assets/logo.svg';
 import './Header.scss';
@@ -25,11 +27,17 @@ interface Tabs {
 const Header = () => {
 	const dispatch = useAppDispatch();
 	const currentTab = useAppSelector((state) => state.movies.currentTab);
+	const searchField = useAppSelector((state) => state.movies.searchField);
 
 	const handleClick = (tabName: string) => {
 		dispatch(setActiveGenre({ name: '', num: null }));
 		dispatch(changeCurrentPage(1));
 		dispatch(changeCurrentTab(tabName));
+		dispatch(changeSearchField(''));
+	};
+
+	const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+		dispatch(changeSearchField(e.target.value));
 	};
 
 	const tabsData: Tabs[] = [
@@ -59,7 +67,7 @@ const Header = () => {
 					: 'header__link';
 
 			return (
-				<div className={classes}>
+				<div key={tab.name} className={classes}>
 					<NavLink
 						onClick={() => handleClick(tab.name)}
 						end
@@ -85,6 +93,8 @@ const Header = () => {
 				<div className='header__option header__option-search'>
 					<form className='form'>
 						<input
+							onChange={handleChange}
+							value={searchField}
 							type='text'
 							className='header__option-input'
 							placeholder='Search'

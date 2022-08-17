@@ -7,6 +7,7 @@ interface MovieInfo {
 	genre_ids: number[];
 	overview: string;
 	id: number;
+	name?: string;
 }
 
 export default MovieInfo;

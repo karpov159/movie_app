@@ -14,6 +14,7 @@ const MovieCard = ({
 	vote_average,
 	overview,
 	genre_ids,
+	name,
 }: MovieInfo) => {
 	const [isOpenedOverview, setOpenedOverview] = useState(false);
 	const genresData: Record<number, string> = useAppSelector(
@@ -32,10 +33,10 @@ const MovieCard = ({
 
 	const genres = genre_ids.map((num: number, i: number) => {
 		if (genre_ids.length === i + 1) {
-			return genresData[num];
+			return genresData[num] ? genresData[num] : '';
 		}
 
-		return genresData[num] + ' / ';
+		return genresData[num] ? genresData[num] + ' / ' : '';
 	});
 
 	return (
@@ -46,6 +47,7 @@ const MovieCard = ({
 				title={title}
 				genres={genres}
 				vote_average={vote_average}
+				name={name}
 			/>
 
 			{isOpenedOverview ? (

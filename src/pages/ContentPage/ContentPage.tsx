@@ -1,5 +1,9 @@
 import { useEffect } from 'react';
-import { fetchMovies, changeCurrentPage } from '../../core/store/MoviesSlice';
+import {
+	fetchMovies,
+	changeCurrentPage,
+	changeSearchField,
+} from '../../core/store/MoviesSlice';
 import { useAppDispatch, useAppSelector } from '../../core/store';
 import { selectAll } from '../../core/store/MoviesSlice';
 import { store } from '../../core/store';
@@ -30,18 +34,26 @@ const ContentPage = ({ directory, title }: ContentData) => {
 	const activeGenre: ActiveGenre = useAppSelector(
 		(state) => state.movies.activeGenre
 	);
+	const searchField = useAppSelector((state) => state.movies.searchField);
 	const dispatch = useAppDispatch();
 	const allMovies = selectAll(store.getState());
 
 	useEffect(() => {
-		if (activeGenre.num) {
+		if (activeGenre.num && !searchField) {
 			const url = `${BASE_URL}discover/movie?${API_KEY}&with_genres=${activeGenre.num}&sort_by=vote_count.desc&vote_count.gte=10&page=${currentPage}`;
 
 			dispatch(fetchMovies(url));
-		} else {
+		}
+
+		if (searchField) {
+			const url = `${BASE_URL}search/movie/?${API_KEY}&query=${searchField}&page=${currentPage}`;
+
+			dispatch(fetchMovies(url));
+		}
+		if (!searchField && !activeGenre.num) {
 			dispatch(fetchMovies(directory + currentPage));
 		}
-	}, [dispatch, currentPage, directory, activeGenre]);
+	}, [dispatch, currentPage, directory, activeGenre, searchField]);
 
 	const renderMovies = (allMovies: any[]) => {
 		return allMovies.map((movie: MovieInfo) => {
