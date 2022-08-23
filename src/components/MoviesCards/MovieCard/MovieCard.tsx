@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { useAppSelector } from '../../core/store';
-import MoviePreview from './MoviePreview';
-import MovieOverview from './MovieOverview';
-import MovieInfo from '../../shared/interfaces/movie.interface';
+import { useAppSelector } from '../../../core/store';
+import MoviePreview from '../MoviePreview';
+import MovieOverview from '../MovieOverview';
+import MovieInfo from '../../../shared/interfaces/movie.interface';
 
 import './MovieCard.scss';
 
@@ -32,11 +32,7 @@ const MovieCard = ({
 	};
 
 	const genres = genre_ids.map((num: number, i: number) => {
-		if (genre_ids.length === i + 1) {
-			return genresData[num] ? genresData[num] : '';
-		}
-
-		return genresData[num] ? genresData[num] + ' / ' : '';
+		return genresData[num] ? genresData[num] + ' ' : '';
 	});
 
 	return (

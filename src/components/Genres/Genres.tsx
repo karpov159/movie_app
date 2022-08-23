@@ -2,16 +2,19 @@ import {
 	setActiveGenre,
 	changeCurrentPage,
 	changeSearchField,
+	changeCurrentTab,
 } from '../../core/store/MoviesSlice';
 import { useAppDispatch, useAppSelector } from '../../core/store';
+import { BASE } from '../../core/config/RoutesConfig';
+import { useNavigate } from 'react-router-dom';
 import Genre from './Genre';
 import Typography from '../../shared/Typography/Typography';
-import getRandomColor from '../../helpers/getRandomColor';
 
 import './Genres.scss';
 
 const Genres = () => {
 	const dispatch = useAppDispatch();
+	const navigate = useNavigate();
 	const genresData: Record<number, string> = useAppSelector(
 		(state) => state.movies.genresData
 	);
@@ -20,6 +23,8 @@ const Genres = () => {
 		dispatch(setActiveGenre({ name, num }));
 		dispatch(changeCurrentPage(1));
 		dispatch(changeSearchField(''));
+		dispatch(changeCurrentTab(''));
+		navigate(BASE.PATH);
 	};
 
 	const createButtons = (genres: Record<number, string>) => {
@@ -30,7 +35,6 @@ const Genres = () => {
 				<Genre
 					key={key}
 					genre={genresData[key]}
-					color={getRandomColor()}
 					handleClick={() => handleClick(genres[key], key)}
 				/>
 			);

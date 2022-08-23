@@ -1,4 +1,6 @@
 import { useAppSelector } from '../../core/store';
+import { useMemo } from 'react';
+import getRandomColor from '../../helpers/getRandomColor';
 
 interface GenreValues {
 	genre: string;
@@ -13,10 +15,12 @@ const Genre = ({ genre, color = '', handleClick }: GenreValues) => {
 			? 'genres__genre genres__genre_active'
 			: 'genres__genre';
 
+	const getColor = useMemo(() => getRandomColor(), []);
+
 	return (
 		<button
 			onClick={handleClick}
-			style={{ backgroundColor: color }}
+			style={{ backgroundColor: getColor }}
 			className={classes}
 			type='button'>
 			{genre}

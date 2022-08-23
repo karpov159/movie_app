@@ -7,6 +7,8 @@ import {
 	ANIMATIONS,
 	ACTORS,
 } from '../config/RoutesConfig';
+import MoviesCards from '../../components/MoviesCards/MoviesCards';
+import ActorsCards from '../../components/ActorsCards/ActorsCards';
 
 const AppRoutes = () => {
 	return (
@@ -18,6 +20,12 @@ const AppRoutes = () => {
 						<ContentPage
 							title={BASE.TITLE}
 							directory={BASE.DIRECTORY}
+							render={(directory, title) => (
+								<MoviesCards
+									directory={directory}
+									title={title}
+								/>
+							)}
 						/>
 					}
 				/>
@@ -27,6 +35,12 @@ const AppRoutes = () => {
 						<ContentPage
 							title={MOVIES.TITLE}
 							directory={MOVIES.DIRECTORY}
+							render={(directory, title) => (
+								<MoviesCards
+									directory={directory}
+									title={title}
+								/>
+							)}
 						/>
 					}
 				/>
@@ -36,6 +50,12 @@ const AppRoutes = () => {
 						<ContentPage
 							title={TVSHOWS.TITLE}
 							directory={TVSHOWS.DIRECTORY}
+							render={(directory, title) => (
+								<MoviesCards
+									directory={directory}
+									title={title}
+								/>
+							)}
 						/>
 					}
 				/>
@@ -45,10 +65,30 @@ const AppRoutes = () => {
 						<ContentPage
 							title={ANIMATIONS.TITLE}
 							directory={ANIMATIONS.DIRECTORY}
+							render={(directory, title) => (
+								<MoviesCards
+									directory={directory}
+									title={title}
+								/>
+							)}
 						/>
 					}
 				/>
-				<Route path={ACTORS.PATH} element={<h1>ACTORS</h1>} />
+				<Route
+					path={ACTORS.PATH}
+					element={
+						<ContentPage
+							title={ACTORS.TITLE}
+							directory={ACTORS.DIRECTORY}
+							render={(directory, title) => (
+								<ActorsCards
+									directory={directory}
+									title={title}
+								/>
+							)}
+						/>
+					}
+				/>
 			</Route>
 		</Routes>
 	);
