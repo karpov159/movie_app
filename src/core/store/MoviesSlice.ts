@@ -8,9 +8,23 @@ import { RootState } from '.';
 import { BASE_URL, API_KEY } from '../../helpers/constants';
 import httpRequest from '../../services/httpRequest';
 
+interface MoviesSliceState {
+	moviesLoadingStatus: string;
+	genresData: Record<number, string>;
+	activeGenre: {
+		name: string;
+		num: null | number;
+	};
+	currentPage: number;
+	currentTab: string;
+	searchField: string;
+	ids: number[];
+	entities: {};
+}
+
 const moviesAdapter = createEntityAdapter();
 
-const initialState = moviesAdapter.getInitialState({
+const initialState: MoviesSliceState = moviesAdapter.getInitialState({
 	moviesLoadingStatus: 'idle',
 	genresData: {},
 	activeGenre: {
@@ -20,6 +34,8 @@ const initialState = moviesAdapter.getInitialState({
 	currentPage: 1,
 	currentTab: '',
 	searchField: '',
+	ids: [],
+	entities: {},
 });
 
 export const fetchMovies = createAsyncThunk(

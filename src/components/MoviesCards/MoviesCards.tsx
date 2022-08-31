@@ -6,7 +6,7 @@ import { store } from '../../core/store';
 import { useAppSelector, useAppDispatch } from '../../core/store';
 import MovieCard from './MovieCard/MovieCard';
 import MovieInfo from '../../shared/interfaces/movie.interface';
-import Spinner from '../../shared/Spinner/Spinner.jsx';
+import Spinner from '../../shared/Spinner/Spinner';
 import Typography from '../../shared/Typography/Typography';
 import Button from '../../shared/Button/Button';
 

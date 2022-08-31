@@ -11,7 +11,7 @@ import ActorCard from './ActorCard/ActorCard';
 import Typography from '../../shared/Typography/Typography';
 import Button from '../../shared/Button/Button';
 
-import Spinner from '../../shared/Spinner/Spinner.jsx';
+import Spinner from '../../shared/Spinner/Spinner';
 import { BASE } from '../../core/config/RoutesConfig';
 
 interface ActorsProps {
