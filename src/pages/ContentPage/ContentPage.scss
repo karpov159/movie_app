@@ -15,7 +15,7 @@
 	&__movies {
 		margin-top: 20px;
 		display: grid;
-		grid-template-columns: repeat(auto-fit, 350px);
+		grid-template-columns: repeat(auto-fill, 350px);
 		grid-auto-rows: 250px;
 		row-gap: 30px;
 		justify-content: space-between;
@@ -23,7 +23,7 @@
 	&__actors {
 		margin-top: 20px;
 		display: grid;
-		grid-template-columns: repeat(auto-fit, 300px);
+		grid-template-columns: repeat(auto-fill, 300px);
 		grid-auto-rows: 400px;
 		row-gap: 50px;
 		justify-content: space-between;

@@ -20,6 +20,7 @@ interface MoviesSliceState {
 	searchField: string;
 	ids: number[];
 	entities: {};
+	isShowedMessage: boolean;
 }
 
 const moviesAdapter = createEntityAdapter();
@@ -36,6 +37,7 @@ const initialState: MoviesSliceState = moviesAdapter.getInitialState({
 	searchField: '',
 	ids: [],
 	entities: {},
+	isShowedMessage: false,
 });
 
 export const fetchMovies = createAsyncThunk(
@@ -74,14 +76,17 @@ const moviesSlice = createSlice({
 				num: action.payload.num,
 			};
 		},
-		changeCurrentPage(state: any, action: PayloadAction<number>) {
+		changeCurrentPage(state, action: PayloadAction<number>) {
 			state.currentPage = action.payload;
 		},
-		changeCurrentTab(state: any, action: PayloadAction<string>) {
+		changeCurrentTab(state, action: PayloadAction<string>) {
 			state.currentTab = action.payload;
 		},
-		changeSearchField(state: any, action: PayloadAction<string>) {
+		changeSearchField(state, action: PayloadAction<string>) {
 			state.searchField = action.payload;
+		},
+		changeShowedMessage(state, action: PayloadAction<boolean>) {
+			state.isShowedMessage = action.payload;
 		},
 	},
 	extraReducers: (builder) => {
@@ -114,4 +119,5 @@ export const {
 	changeCurrentPage,
 	changeCurrentTab,
 	changeSearchField,
+	changeShowedMessage,
 } = actions;

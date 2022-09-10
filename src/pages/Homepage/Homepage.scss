@@ -1,0 +1,8 @@
+@import '../../style/variables.scss';
+
+.homepage {
+	background-color: $bg-color;
+	display: grid;
+	grid-template-columns: 550px calc(100vw - 600px);
+	grid-template-rows: 120px minmax(calc(100vh - 120px), auto);
+}

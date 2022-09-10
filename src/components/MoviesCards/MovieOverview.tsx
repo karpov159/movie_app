@@ -1,13 +1,14 @@
 import { useEffect, useRef } from 'react';
+import { useAppDispatch } from '../../core/store';
 import { IMG_PATH } from '../../helpers/constants';
+import { favMoviesLocalStorage } from '../../core/LocalStorage/favMoviesLocalStorage';
+import { changeShowedMessage } from '../../core/store/MoviesSlice';
+import MovieInfo from '../../shared/interfaces/movie.interface';
 
-interface MovieOverviewValues {
-	title: string;
-	backdrop_path: string;
-	vote_average: number;
-	release_date: string;
-	overview: string;
+interface MovieOverviewValues extends MovieInfo {
 	handleClick: (boolean: boolean) => void;
+	deleteMovie?: ((n: string) => void) | undefined;
+	page: string;
 }
 
 const MovieOverview = ({
@@ -17,8 +18,17 @@ const MovieOverview = ({
 	release_date,
 	overview,
 	handleClick,
+	genre_ids,
+	poster_path,
+	name,
+	id,
+	deleteMovie,
+	first_air_date,
+	page,
 }: MovieOverviewValues) => {
 	const overlay = useRef<HTMLDivElement>(null);
+
+	const dispatch = useAppDispatch();
 
 	useEffect(() => {
 		const clickListener = (e: MouseEvent) => {
@@ -39,6 +49,46 @@ const MovieOverview = ({
 		};
 	}, [overlay, handleClick]);
 
+	const addToFavorite = () => {
+		const movies = favMoviesLocalStorage.getItem() || {};
+
+		dispatch(changeShowedMessage(true));
+
+		const newMovie = {
+			backdrop_path,
+			title,
+			vote_average,
+			release_date,
+			overview,
+			handleClick,
+			genre_ids,
+			poster_path,
+			id,
+			first_air_date,
+			name,
+		};
+
+		const nameOfMovie = name || title;
+
+		movies[nameOfMovie] = newMovie;
+
+		favMoviesLocalStorage.setItem(movies);
+	};
+
+	const onDelete = () => {
+		const nameOfMovie = name || title;
+
+		if (deleteMovie) {
+			deleteMovie(nameOfMovie);
+		}
+
+		const movies = favMoviesLocalStorage.getItem();
+
+		delete movies[nameOfMovie];
+
+		favMoviesLocalStorage.setItem(movies);
+	};
+
 	return (
 		<div ref={overlay} className='movie__overview'>
 			<div className='movie__overview-wrapper'>
@@ -52,7 +102,7 @@ const MovieOverview = ({
 					<img src={IMG_PATH + backdrop_path} alt={title} />
 				</div>
 
-				<div className='movie__overview-title'>{title}</div>
+				<div className='movie__overview-title'>{title || name}</div>
 
 				<div className='movie__overview-rating'>
 					<button className='movie__overview-star'>
@@ -64,7 +114,9 @@ const MovieOverview = ({
 					</button>
 					<div className='movie__overview-rate'>{vote_average}</div>
 
-					<div className='movie__overview-date'>{release_date}</div>
+					<div className='movie__overview-date'>
+						{release_date || first_air_date}
+					</div>
 				</div>
 
 				<div className='movie__overview-descr'>{overview}</div>
@@ -79,13 +131,15 @@ const MovieOverview = ({
 						Play
 					</button>
 
-					<button className='movie__overview-add'>
-						<svg
-							xmlns='http://www.w3.org/2000/svg'
-							viewBox='0 0 448 512'>
-							<path d='M432 256c0 17.69-14.33 32.01-32 32.01H256v144c0 17.69-14.33 31.99-32 31.99s-32-14.3-32-31.99v-144H48c-17.67 0-32-14.32-32-32.01s14.33-31.99 32-31.99H192v-144c0-17.69 14.33-32.01 32-32.01s32 14.32 32 32.01v144h144C417.7 224 432 238.3 432 256z' />
-						</svg>
-						My list
+					<button onClick={onDelete} className='movie__overview-add'>
+						{page === 'favorite' ? null : (
+							<svg
+								xmlns='http://www.w3.org/2000/svg'
+								viewBox='0 0 448 512'>
+								<path d='M432 256c0 17.69-14.33 32.01-32 32.01H256v144c0 17.69-14.33 31.99-32 31.99s-32-14.3-32-31.99v-144H48c-17.67 0-32-14.32-32-32.01s14.33-31.99 32-31.99H192v-144c0-17.69 14.33-32.01 32-32.01s32 14.32 32 32.01v144h144C417.7 224 432 238.3 432 256z' />
+							</svg>
+						)}
+						{page === 'favorite' ? 'Remove' : 'My list'}
 					</button>
 				</div>
 			</div>

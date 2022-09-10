@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { fetchMovies, changeCurrentPage } from '../../core/store/MoviesSlice';
 import { BASE_URL, API_KEY } from '../../helpers/constants';
 import { selectAll } from '../../core/store/MoviesSlice';
@@ -31,6 +31,8 @@ const MoviesCards = ({ directory, title }: MoviesProps) => {
 	);
 	const searchField = useAppSelector((state) => state.movies.searchField);
 	const dispatch = useAppDispatch();
+	// const [, updateState] = useState({});
+	// const forceUpdate = useCallback(() => updateState({}), []);
 
 	useEffect(() => {
 		if (activeGenre.num && !searchField) {

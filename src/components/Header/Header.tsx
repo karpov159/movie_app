@@ -5,6 +5,7 @@ import {
 	ANIMATIONS,
 	TVSHOWS,
 	ACTORS,
+	FAVORITE,
 } from '../../core/config/RoutesConfig';
 import { ProfileIcon, SearchIcon, NotifyIcon } from '../Icons';
 import { useAppDispatch, useAppSelector } from '../../core/store';
@@ -104,9 +105,9 @@ const Header = () => {
 						</button>
 					</form>
 				</div>
-				<button className='header__option'>
+				<NavLink to={FAVORITE.PATH} className='header__option'>
 					<NotifyIcon />
-				</button>
+				</NavLink>
 				<button className='header__option'>
 					<ProfileIcon />
 				</button>

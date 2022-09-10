@@ -1,0 +1,36 @@
+@import '../../style/variables.scss';
+
+.favorite-movies {
+	height: 100vh;
+	padding: 30px 100px;
+	background-color: $bg-color;
+	&__header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+	&__content {
+		margin-top: 20px;
+		display: grid;
+		grid-template-columns: repeat(auto-fill, 350px);
+		grid-auto-rows: 250px;
+		row-gap: 30px;
+		justify-content: space-between;
+	}
+	&__button {
+		border: none;
+		background: none;
+		color: #fff;
+		font-size: 16px;
+		margin-bottom: 5px;
+		width: 100%;
+		display: flex;
+		justify-content: flex-end;
+		cursor: pointer;
+		transition: 0.3s all;
+		text-decoration: none;
+		&:hover {
+			color: rgb(87, 218, 241);
+		}
+	}
+}

@@ -32,6 +32,12 @@ const RoutesConfig: Record<string, RoutesData> = {
 		TITLE: 'Actors',
 		DIRECTORY: `${BASE_URL}person/popular?${API_KEY}&page=`,
 	},
+	FAVORITE: {
+		PATH: '/favorite',
+		TITLE: 'My list',
+		DIRECTORY: '',
+	},
 };
 
-export const { BASE, MOVIES, TVSHOWS, ANIMATIONS, ACTORS } = RoutesConfig;
+export const { BASE, MOVIES, TVSHOWS, ANIMATIONS, ACTORS, FAVORITE } =
+	RoutesConfig;

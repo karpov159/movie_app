@@ -7,6 +7,7 @@ interface MovieInfo {
 	genre_ids: number[];
 	overview: string;
 	id: number;
+	first_air_date: string;
 	name?: string;
 }
 

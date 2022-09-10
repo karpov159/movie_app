@@ -1,11 +1,12 @@
 import { Routes, Route } from 'react-router-dom';
-import { Homepage, ContentPage } from '../../pages';
+import { Homepage, ContentPage, FavoriteMovies } from '../../pages';
 import {
 	BASE,
 	MOVIES,
 	TVSHOWS,
 	ANIMATIONS,
 	ACTORS,
+	FAVORITE,
 } from '../config/RoutesConfig';
 import MoviesCards from '../../components/MoviesCards/MoviesCards';
 import ActorsCards from '../../components/ActorsCards/ActorsCards';
@@ -90,6 +91,10 @@ const AppRoutes = () => {
 					}
 				/>
 			</Route>
+			<Route
+				path={FAVORITE.PATH}
+				element={<FavoriteMovies title={FAVORITE.TITLE} />}
+			/>
 		</Routes>
 	);
 };
