@@ -70,8 +70,10 @@ const ActorsCards = ({ directory, title }: ActorsProps) => {
 		<>
 			<div className='content-page__headline'>
 				<Typography component='h2' children={title} />
+
 				<div className='content-page__buttons'>
 					{previousButton}
+
 					<Button
 						handleClick={clickNextPage}
 						children='Next >'
@@ -79,7 +81,9 @@ const ActorsCards = ({ directory, title }: ActorsProps) => {
 					/>
 				</div>
 			</div>
+
 			<div className='content-page__actors'>{actorsCards}</div>
+
 			{spinner}
 		</>
 	);

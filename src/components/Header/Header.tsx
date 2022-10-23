@@ -5,7 +5,6 @@ import {
 	ANIMATIONS,
 	TVSHOWS,
 	ACTORS,
-	FAVORITE,
 } from '../../core/config/RoutesConfig';
 import { ProfileIcon, SearchIcon, NotifyIcon } from '../Icons';
 import { useAppDispatch, useAppSelector } from '../../core/store';
@@ -100,14 +99,17 @@ const Header = () => {
 							className='header__option-input'
 							placeholder='Search'
 						/>
+
 						<button type='submit' className='header__option-btn'>
 							<SearchIcon />
 						</button>
 					</form>
 				</div>
-				<NavLink to={FAVORITE.PATH} className='header__option'>
+
+				<button className='header__option'>
 					<NotifyIcon />
-				</NavLink>
+				</button>
+
 				<button className='header__option'>
 					<ProfileIcon />
 				</button>

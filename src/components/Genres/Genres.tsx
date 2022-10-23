@@ -50,6 +50,7 @@ const Genres = () => {
 	return (
 		<div className='genres'>
 			<Typography component='h2' children='All genres' />
+
 			<div className='genres__list'>{genresButtons}</div>
 		</div>
 	);

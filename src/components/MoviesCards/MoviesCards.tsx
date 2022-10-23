@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect } from 'react';
 import { fetchMovies, changeCurrentPage } from '../../core/store/MoviesSlice';
 import { BASE_URL, API_KEY } from '../../helpers/constants';
 import { selectAll } from '../../core/store/MoviesSlice';
@@ -12,7 +12,7 @@ import Button from '../../shared/Button/Button';
 
 interface ActiveGenre {
 	name: string;
-	num: number | null;
+	num: string | null;
 }
 
 interface MoviesProps {
@@ -31,8 +31,6 @@ const MoviesCards = ({ directory, title }: MoviesProps) => {
 	);
 	const searchField = useAppSelector((state) => state.movies.searchField);
 	const dispatch = useAppDispatch();
-	// const [, updateState] = useState({});
-	// const forceUpdate = useCallback(() => updateState({}), []);
 
 	useEffect(() => {
 		if (activeGenre.num && !searchField) {
@@ -73,6 +71,7 @@ const MoviesCards = ({ directory, title }: MoviesProps) => {
 			return <MovieCard key={movie.id} {...movie} />;
 		});
 	};
+
 	const spinner = moviesLoadingStatus === 'loading' ? <Spinner /> : null;
 
 	const moviesCards =
@@ -82,6 +81,7 @@ const MoviesCards = ({ directory, title }: MoviesProps) => {
 		<>
 			<div className='content-page__headline'>
 				<Typography component='h2' children={title} />
+
 				<div className='content-page__buttons'>
 					{previousButton}
 					<Button
@@ -91,7 +91,9 @@ const MoviesCards = ({ directory, title }: MoviesProps) => {
 					/>
 				</div>
 			</div>
+
 			<div className='content-page__movies'>{moviesCards}</div>
+
 			{spinner}
 		</>
 	);

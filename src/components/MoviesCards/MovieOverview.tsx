@@ -1,8 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { useAppDispatch } from '../../core/store';
 import { IMG_PATH } from '../../helpers/constants';
-import { favMoviesLocalStorage } from '../../core/LocalStorage/favMoviesLocalStorage';
-import { changeShowedMessage } from '../../core/store/MoviesSlice';
 import MovieInfo from '../../shared/interfaces/movie.interface';
 
 interface MovieOverviewValues extends MovieInfo {
@@ -18,17 +15,11 @@ const MovieOverview = ({
 	release_date,
 	overview,
 	handleClick,
-	genre_ids,
-	poster_path,
 	name,
-	id,
-	deleteMovie,
 	first_air_date,
 	page,
 }: MovieOverviewValues) => {
 	const overlay = useRef<HTMLDivElement>(null);
-
-	const dispatch = useAppDispatch();
 
 	useEffect(() => {
 		const clickListener = (e: MouseEvent) => {
@@ -48,46 +39,6 @@ const MovieOverview = ({
 			document.removeEventListener('click', clickListener);
 		};
 	}, [overlay, handleClick]);
-
-	const addToFavorite = () => {
-		const movies = favMoviesLocalStorage.getItem() || {};
-
-		dispatch(changeShowedMessage(true));
-
-		const newMovie = {
-			backdrop_path,
-			title,
-			vote_average,
-			release_date,
-			overview,
-			handleClick,
-			genre_ids,
-			poster_path,
-			id,
-			first_air_date,
-			name,
-		};
-
-		const nameOfMovie = name || title;
-
-		movies[nameOfMovie] = newMovie;
-
-		favMoviesLocalStorage.setItem(movies);
-	};
-
-	const onDelete = () => {
-		const nameOfMovie = name || title;
-
-		if (deleteMovie) {
-			deleteMovie(nameOfMovie);
-		}
-
-		const movies = favMoviesLocalStorage.getItem();
-
-		delete movies[nameOfMovie];
-
-		favMoviesLocalStorage.setItem(movies);
-	};
 
 	return (
 		<div ref={overlay} className='movie__overview'>
@@ -131,7 +82,7 @@ const MovieOverview = ({
 						Play
 					</button>
 
-					<button onClick={onDelete} className='movie__overview-add'>
+					<button className='movie__overview-add'>
 						{page === 'favorite' ? null : (
 							<svg
 								xmlns='http://www.w3.org/2000/svg'

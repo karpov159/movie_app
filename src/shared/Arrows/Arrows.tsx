@@ -33,6 +33,7 @@ const Arrows = ({
 	return (
 		<div className='arrows'>
 			{previousButton}
+
 			{nextButton}
 		</div>
 	);

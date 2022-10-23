@@ -1,12 +1,11 @@
 import { Routes, Route } from 'react-router-dom';
-import { Homepage, ContentPage, FavoriteMovies } from '../../pages';
+import { Homepage, ContentPage } from '../../pages';
 import {
 	BASE,
 	MOVIES,
 	TVSHOWS,
 	ANIMATIONS,
 	ACTORS,
-	FAVORITE,
 } from '../config/RoutesConfig';
 import MoviesCards from '../../components/MoviesCards/MoviesCards';
 import ActorsCards from '../../components/ActorsCards/ActorsCards';
@@ -30,6 +29,7 @@ const AppRoutes = () => {
 						/>
 					}
 				/>
+
 				<Route
 					path={MOVIES.PATH}
 					element={
@@ -45,6 +45,7 @@ const AppRoutes = () => {
 						/>
 					}
 				/>
+
 				<Route
 					path={TVSHOWS.PATH}
 					element={
@@ -60,6 +61,7 @@ const AppRoutes = () => {
 						/>
 					}
 				/>
+
 				<Route
 					path={ANIMATIONS.PATH}
 					element={
@@ -75,6 +77,7 @@ const AppRoutes = () => {
 						/>
 					}
 				/>
+
 				<Route
 					path={ACTORS.PATH}
 					element={
@@ -91,10 +94,6 @@ const AppRoutes = () => {
 					}
 				/>
 			</Route>
-			<Route
-				path={FAVORITE.PATH}
-				element={<FavoriteMovies title={FAVORITE.TITLE} />}
-			/>
 		</Routes>
 	);
 };

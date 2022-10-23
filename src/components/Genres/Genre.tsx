@@ -8,7 +8,7 @@ interface GenreValues {
 	handleClick: () => void;
 }
 
-const Genre = ({ genre, color = '', handleClick }: GenreValues) => {
+const Genre = ({ genre, handleClick }: GenreValues) => {
 	const activeGenre = useAppSelector((state) => state.movies.activeGenre);
 	const classes =
 		activeGenre.name === genre

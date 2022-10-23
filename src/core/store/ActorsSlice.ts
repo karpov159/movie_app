@@ -2,17 +2,24 @@ import {
 	createSlice,
 	createEntityAdapter,
 	createAsyncThunk,
+	EntityState,
 } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '.';
 import httpRequest from '../../services/httpRequest';
 
+interface ActorsSliceState {
+	actorsLoadingStatus: string;
+	currentPage: number;
+}
+
 const actorsAdapter = createEntityAdapter();
 
-const initialState = actorsAdapter.getInitialState({
-	actorsLoadingStatus: 'idle',
-	currentPage: 1,
-});
+const initialState: EntityState<unknown> & ActorsSliceState =
+	actorsAdapter.getInitialState({
+		actorsLoadingStatus: 'idle',
+		currentPage: 1,
+	});
 
 export const fetchActors = createAsyncThunk(
 	'actors/fetchActors',
@@ -27,7 +34,7 @@ const actorsSlice = createSlice({
 	name: 'actors',
 	initialState,
 	reducers: {
-		changeCurrentPage(state: any, action: PayloadAction<number>) {
+		changeCurrentPage(state, action: PayloadAction<number>) {
 			state.currentPage = action.payload;
 		},
 	},

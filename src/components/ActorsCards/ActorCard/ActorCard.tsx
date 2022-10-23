@@ -15,6 +15,7 @@ const ActorCard = ({ name, profile_path }: ActorInfo) => {
 					alt={name}
 					className='actor__preview-img'
 				/>
+
 				<div className='actor__preview-title'>{name}</div>
 			</div>
 		</div>

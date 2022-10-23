@@ -2,6 +2,7 @@ import {
 	createSlice,
 	createEntityAdapter,
 	createAsyncThunk,
+	EntityState,
 } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '.';
@@ -13,32 +14,27 @@ interface MoviesSliceState {
 	genresData: Record<number, string>;
 	activeGenre: {
 		name: string;
-		num: null | number;
+		num: null | string;
 	};
 	currentPage: number;
 	currentTab: string;
 	searchField: string;
-	ids: number[];
-	entities: {};
-	isShowedMessage: boolean;
 }
 
 const moviesAdapter = createEntityAdapter();
 
-const initialState: MoviesSliceState = moviesAdapter.getInitialState({
-	moviesLoadingStatus: 'idle',
-	genresData: {},
-	activeGenre: {
-		name: '',
-		num: null,
-	},
-	currentPage: 1,
-	currentTab: '',
-	searchField: '',
-	ids: [],
-	entities: {},
-	isShowedMessage: false,
-});
+const initialState: EntityState<unknown> & MoviesSliceState =
+	moviesAdapter.getInitialState({
+		moviesLoadingStatus: 'idle',
+		genresData: {},
+		activeGenre: {
+			name: '',
+			num: null,
+		},
+		currentPage: 1,
+		currentTab: '',
+		searchField: '',
+	});
 
 export const fetchMovies = createAsyncThunk(
 	'movies/fetchMovies',
@@ -64,11 +60,11 @@ const moviesSlice = createSlice({
 	name: 'movies',
 	initialState,
 	reducers: {
-		setGenres(state: any, action: PayloadAction<Record<number, string>>) {
+		setGenres(state, action: PayloadAction<Record<number, string>>) {
 			state.genresData = action.payload;
 		},
 		setActiveGenre(
-			state: any,
+			state,
 			action: PayloadAction<{ name: string; num: string | null }>
 		) {
 			state.activeGenre = {
@@ -84,9 +80,6 @@ const moviesSlice = createSlice({
 		},
 		changeSearchField(state, action: PayloadAction<string>) {
 			state.searchField = action.payload;
-		},
-		changeShowedMessage(state, action: PayloadAction<boolean>) {
-			state.isShowedMessage = action.payload;
 		},
 	},
 	extraReducers: (builder) => {
@@ -119,5 +112,4 @@ export const {
 	changeCurrentPage,
 	changeCurrentTab,
 	changeSearchField,
-	changeShowedMessage,
 } = actions;
