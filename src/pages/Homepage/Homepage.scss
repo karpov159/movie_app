@@ -3,6 +3,12 @@
 .homepage {
 	background-color: $bg-color;
 	display: grid;
-	grid-template-columns: 550px calc(100vw - 600px);
+	grid-template-columns: 1fr 2fr;
 	grid-template-rows: 120px minmax(calc(100vh - 120px), auto);
+}
+
+@media (max-width: 992px) {
+	.homepage {
+		grid-template-rows: 100px auto minmax(calc(100vh - 100px), auto);
+	}
 }

@@ -82,8 +82,12 @@ const Header = () => {
 
 	return (
 		<header className='header'>
-			<NavLink onClick={handleClick('')} end to={BASE.PATH}>
-				<img className='header__logo' src={logo} alt='logo' />
+			<NavLink
+				className='header__logo'
+				onClick={handleClick('')}
+				end
+				to={BASE.PATH}>
+				<img src={logo} alt='logo' />
 			</NavLink>
 
 			<div className='header__menu'>{tabs}</div>

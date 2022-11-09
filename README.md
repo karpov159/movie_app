@@ -7,6 +7,8 @@
 -   Search trending movies/tv-shows/animations/actors;
 -   By clicking on movie you can see movie`s description, release date, title,
     poster and genres;
+-   API: https://developers.themoviedb.org/3/getting-started;
+-   Design: myself;
 
 _If you can't see the images, try to enable VPN._
 

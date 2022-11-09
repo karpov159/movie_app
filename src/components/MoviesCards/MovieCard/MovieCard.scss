@@ -285,3 +285,16 @@
 		}
 	}
 }
+
+@media (max-width: 1200px) {
+	.movie__overview {
+		&-wrapper {
+			width: 700px;
+		}
+
+		&-img {
+			width: 700px;
+			height: 400px;
+		}
+	}
+}
