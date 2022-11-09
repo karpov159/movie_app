@@ -7,12 +7,13 @@ import {
 	changeCurrentPage,
 } from '../../core/store/ActorsSlice';
 import { useNavigate } from 'react-router-dom';
+import { BASE } from '../../core/config/RoutesConfig';
+import Error from '../../shared/Error/Error';
 import ActorCard from './ActorCard/ActorCard';
 import Typography from '../../shared/Typography/Typography';
 import Button from '../../shared/Button/Button';
 
 import Spinner from '../../shared/Spinner/Spinner';
-import { BASE } from '../../core/config/RoutesConfig';
 
 interface ActorsProps {
 	directory: string;
@@ -63,6 +64,9 @@ const ActorsCards = ({ directory, title }: ActorsProps) => {
 		) : null;
 
 	const spinner = actorsLoadingStatus === 'loading' ? <Spinner /> : null;
+
+	const error = actorsLoadingStatus === 'error' ? <Error /> : null;
+
 	const actorsCards =
 		actorsLoadingStatus === 'idle' ? renderActors(allActors) : null;
 
@@ -81,7 +85,7 @@ const ActorsCards = ({ directory, title }: ActorsProps) => {
 					/>
 				</div>
 			</div>
-
+			{error}
 			<div className='content-page__actors'>{actorsCards}</div>
 
 			{spinner}

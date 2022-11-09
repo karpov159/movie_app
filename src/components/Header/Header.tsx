@@ -30,10 +30,12 @@ const Header = () => {
 	const searchField = useAppSelector((state) => state.movies.searchField);
 
 	const handleClick = (tabName: string) => {
-		dispatch(setActiveGenre({ name: '', num: null }));
-		dispatch(changeCurrentPage(1));
-		dispatch(changeCurrentTab(tabName));
-		dispatch(changeSearchField(''));
+		return (): void => {
+			dispatch(setActiveGenre({ name: '', num: null }));
+			dispatch(changeCurrentPage(1));
+			dispatch(changeCurrentTab(tabName));
+			dispatch(changeSearchField(''));
+		};
 	};
 
 	const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -68,10 +70,7 @@ const Header = () => {
 
 			return (
 				<div key={tab.name} className={classes}>
-					<NavLink
-						onClick={() => handleClick(tab.name)}
-						end
-						to={tab.path}>
+					<NavLink onClick={handleClick(tab.name)} end to={tab.path}>
 						{tab.name}
 					</NavLink>
 				</div>
@@ -83,7 +82,7 @@ const Header = () => {
 
 	return (
 		<header className='header'>
-			<NavLink onClick={() => handleClick('')} end to={BASE.PATH}>
+			<NavLink onClick={handleClick('')} end to={BASE.PATH}>
 				<img className='header__logo' src={logo} alt='logo' />
 			</NavLink>
 

@@ -31,13 +31,15 @@ const MovieCard = ({
 	);
 
 	const handleClick = (boolean: boolean) => {
-		setOpenedOverview(boolean);
+		return () => {
+			setOpenedOverview(boolean);
 
-		if (boolean) {
-			document.body.style.overflow = 'hidden';
-		} else {
-			document.body.style.overflow = '';
-		}
+			if (boolean) {
+				document.body.style.overflow = 'hidden';
+			} else {
+				document.body.style.overflow = '';
+			}
+		};
 	};
 
 	const genres = genre_ids.map((num: number, i: number) => {

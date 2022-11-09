@@ -9,6 +9,7 @@ import MovieInfo from '../../shared/interfaces/movie.interface';
 import Spinner from '../../shared/Spinner/Spinner';
 import Typography from '../../shared/Typography/Typography';
 import Button from '../../shared/Button/Button';
+import Error from '../../shared/Error/Error';
 
 interface ActiveGenre {
 	name: string;
@@ -74,6 +75,8 @@ const MoviesCards = ({ directory, title }: MoviesProps) => {
 
 	const spinner = moviesLoadingStatus === 'loading' ? <Spinner /> : null;
 
+	const error = moviesLoadingStatus === 'error' ? <Error /> : null;
+
 	const moviesCards =
 		moviesLoadingStatus === 'idle' ? renderMovies(allMovies) : null;
 
@@ -91,6 +94,7 @@ const MoviesCards = ({ directory, title }: MoviesProps) => {
 					/>
 				</div>
 			</div>
+			{error}
 
 			<div className='content-page__movies'>{moviesCards}</div>
 

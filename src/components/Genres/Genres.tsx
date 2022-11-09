@@ -20,11 +20,13 @@ const Genres = () => {
 	);
 
 	const handleClick = (name: string, num: string) => {
-		dispatch(setActiveGenre({ name, num }));
-		dispatch(changeCurrentPage(1));
-		dispatch(changeSearchField(''));
-		dispatch(changeCurrentTab(''));
-		navigate(BASE.PATH);
+		return (): void => {
+			dispatch(setActiveGenre({ name, num }));
+			dispatch(changeCurrentPage(1));
+			dispatch(changeSearchField(''));
+			dispatch(changeCurrentTab(''));
+			navigate(BASE.PATH);
+		};
 	};
 
 	const createButtons = (genres: Record<number, string>) => {
@@ -35,7 +37,7 @@ const Genres = () => {
 				<Genre
 					key={key}
 					genre={genresData[key]}
-					handleClick={() => handleClick(genres[key], key)}
+					handleClick={handleClick(genres[key], key)}
 				/>
 			);
 

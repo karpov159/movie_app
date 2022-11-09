@@ -5,7 +5,7 @@ interface MoviePreviewValues {
 	poster_path: string;
 	genres: string[];
 	vote_average: number;
-	handleClick: (boolean: boolean) => void;
+	handleClick: (boolean: boolean) => () => void;
 	name?: string;
 }
 
@@ -18,7 +18,7 @@ const MoviePreview = ({
 	name,
 }: MoviePreviewValues) => {
 	return (
-		<div onClick={() => handleClick(true)} className='movie__preview'>
+		<div onClick={handleClick(true)} className='movie__preview'>
 			<img
 				src={IMG_PATH + poster_path}
 				alt={title}
