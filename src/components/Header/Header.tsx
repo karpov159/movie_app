@@ -6,7 +6,7 @@ import {
 	TVSHOWS,
 	ACTORS,
 } from '../../core/config/RoutesConfig';
-import { ProfileIcon, SearchIcon, NotifyIcon } from '../Icons';
+import { SearchIcon } from '../Icons';
 import { useAppDispatch, useAppSelector } from '../../core/store';
 import {
 	setActiveGenre,
@@ -101,28 +101,18 @@ const Header = () => {
 
 			<div className='header__options'>
 				<div className='header__option header__option-search'>
-					<div>
-						<input
-							onChange={handleChange}
-							value={searchField}
-							type='text'
-							className='header__option-input'
-							placeholder='Search'
-						/>
+					<input
+						onChange={handleChange}
+						value={searchField}
+						type='text'
+						className='header__option-input'
+						placeholder='Search'
+					/>
 
-						<div className='header__option-icon'>
-							<SearchIcon />
-						</div>
+					<div className='header__option-icon'>
+						<SearchIcon />
 					</div>
 				</div>
-
-				<button className='header__option'>
-					<NotifyIcon />
-				</button>
-
-				<button className='header__option'>
-					<ProfileIcon />
-				</button>
 			</div>
 		</header>
 	);

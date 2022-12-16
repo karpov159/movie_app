@@ -1,11 +1,9 @@
 import { useEffect, useRef } from 'react';
-import { IMG_PATH } from '../../helpers/constants';
-import MovieInfo from '../../shared/interfaces/movie.interface';
+import { IMG_PATH } from '../../../../helpers/constants';
+import MovieInfo from '../../../../shared/interfaces/movie.interface';
 
 interface MovieOverviewValues extends MovieInfo {
-	handleClick: (boolean: boolean) => () => void;
-	deleteMovie?: ((n: string) => void) | undefined;
-	page: string;
+	toggleClick: (boolean: boolean) => void;
 }
 
 const MovieOverview = ({
@@ -14,10 +12,9 @@ const MovieOverview = ({
 	vote_average,
 	release_date,
 	overview,
-	handleClick,
+	toggleClick,
 	name,
 	first_air_date,
-	page,
 }: MovieOverviewValues) => {
 	const overlay = useRef<HTMLDivElement>(null);
 
@@ -29,7 +26,7 @@ const MovieOverview = ({
 				overlay.current &&
 				target.classList.contains('movie__overview')
 			) {
-				handleClick(false)();
+				toggleClick(false);
 			}
 		};
 
@@ -38,14 +35,16 @@ const MovieOverview = ({
 		return () => {
 			document.removeEventListener('click', clickListener);
 		};
-	}, [overlay, handleClick]);
+	}, [overlay, toggleClick]);
+
+	const handleClick = () => {
+		toggleClick(false);
+	};
 
 	return (
 		<div ref={overlay} className='movie__overview'>
 			<div className='movie__overview-wrapper'>
-				<div
-					onClick={handleClick(false)}
-					className='movie__overview-close'>
+				<div onClick={handleClick} className='movie__overview-close'>
 					&times;
 				</div>
 
@@ -75,27 +74,6 @@ const MovieOverview = ({
 					</div>
 
 					<div className='movie__overview-descr'>{overview}</div>
-				</div>
-				<div className='movie__overview-btns'>
-					<button className='movie__overview-play'>
-						<svg
-							xmlns='http://www.w3.org/2000/svg'
-							viewBox='0 0 384 512'>
-							<path d='M361 215C375.3 223.8 384 239.3 384 256C384 272.7 375.3 288.2 361 296.1L73.03 472.1C58.21 482 39.66 482.4 24.52 473.9C9.377 465.4 0 449.4 0 432V80C0 62.64 9.377 46.63 24.52 38.13C39.66 29.64 58.21 29.99 73.03 39.04L361 215z' />
-						</svg>
-						Play
-					</button>
-
-					<button className='movie__overview-add'>
-						{page === 'favorite' ? null : (
-							<svg
-								xmlns='http://www.w3.org/2000/svg'
-								viewBox='0 0 448 512'>
-								<path d='M432 256c0 17.69-14.33 32.01-32 32.01H256v144c0 17.69-14.33 31.99-32 31.99s-32-14.3-32-31.99v-144H48c-17.67 0-32-14.32-32-32.01s14.33-31.99 32-31.99H192v-144c0-17.69 14.33-32.01 32-32.01s32 14.32 32 32.01v144h144C417.7 224 432 238.3 432 256z' />
-							</svg>
-						)}
-						My list
-					</button>
 				</div>
 			</div>
 		</div>

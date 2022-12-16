@@ -10,11 +10,6 @@ import Error from '../../shared/Error/Error';
 import MovieData from '../../shared/interfaces/movie.interface';
 import Headline from '../../shared/Headline/Headline';
 
-interface ActiveGenre {
-	name: string;
-	num: string | null;
-}
-
 interface MoviesProps {
 	directory: string;
 	title: string;
@@ -26,9 +21,7 @@ const MoviesCards = ({ directory, title }: MoviesProps) => {
 	const moviesLoadingStatus = useAppSelector(
 		(state) => state.movies.moviesLoadingStatus
 	);
-	const activeGenre: ActiveGenre = useAppSelector(
-		(state) => state.movies.activeGenre
-	);
+	const activeGenre = useAppSelector((state) => state.movies.activeGenre);
 	const searchField = useAppSelector((state) => state.movies.searchField);
 	const dispatch = useAppDispatch();
 

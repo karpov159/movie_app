@@ -7,7 +7,7 @@ import {
 import { useAppDispatch, useAppSelector } from '../../core/store';
 import { BASE } from '../../core/config/RoutesConfig';
 import { useNavigate } from 'react-router-dom';
-import Genre from './Genre';
+import Genre from './Genre/Genre';
 import Typography from '../../shared/Typography/Typography';
 
 import './Genres.scss';
@@ -15,9 +15,7 @@ import './Genres.scss';
 const Genres = () => {
 	const dispatch = useAppDispatch();
 	const navigate = useNavigate();
-	const genresData: Record<number, string> = useAppSelector(
-		(state) => state.movies.genresData
-	);
+	const genresData = useAppSelector((state) => state.movies.genresData);
 
 	const handleClick = (name: string, num: string) => {
 		return (): void => {
@@ -30,7 +28,7 @@ const Genres = () => {
 	};
 
 	const createButtons = (genres: Record<number, string>) => {
-		const arr = [];
+		const arr: JSX.Element[] = [];
 
 		for (let key in genres) {
 			const genre = (

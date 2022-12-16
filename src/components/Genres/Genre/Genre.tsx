@@ -1,10 +1,9 @@
-import { useAppSelector } from '../../core/store';
+import { useAppSelector } from '../../../core/store';
 import { useMemo } from 'react';
-import getRandomColor from '../../helpers/getRandomColor';
+import getRandomColor from '../../../helpers/getRandomColor';
 
 interface GenreValues {
 	genre: string;
-	color?: string;
 	handleClick: () => void;
 }
 

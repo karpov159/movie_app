@@ -10,13 +10,15 @@ import { BASE_URL, API_KEY } from '../../helpers/constants';
 import httpRequest from '../../services/httpRequest';
 import MovieData from '../../shared/interfaces/movie.interface';
 
+interface ActiveGenre {
+	name: string;
+	num: string | null;
+}
+
 interface MoviesSliceState {
 	moviesLoadingStatus: string;
 	genresData: Record<number, string>;
-	activeGenre: {
-		name: string;
-		num: null | string;
-	};
+	activeGenre: ActiveGenre;
 	currentPage: number;
 	currentTab: string;
 	searchField: string;

@@ -1,15 +1,10 @@
 import { useState } from 'react';
 import { useAppSelector } from '../../../core/store';
-import MoviePreview from '../MoviePreview';
-import MovieOverview from '../MovieOverview';
+import MoviePreview from './MoviePreview/MoviePreview';
+import MovieOverview from './MovieOverview/MovieOverview';
 import MovieInfo from '../../../shared/interfaces/movie.interface';
 
 import './MovieCard.scss';
-
-interface MovieAdditionalInfo extends MovieInfo {
-	deleteMovie?: ((n: string) => void) | undefined;
-	page?: string | undefined;
-}
 
 const MovieCard = ({
 	backdrop_path,
@@ -21,35 +16,29 @@ const MovieCard = ({
 	genre_ids,
 	name,
 	id,
-	deleteMovie,
 	first_air_date,
-	page = 'Default',
-}: MovieAdditionalInfo) => {
+}: MovieInfo) => {
 	const [isOpenedOverview, setOpenedOverview] = useState(false);
-	const genresData: Record<number, string> = useAppSelector(
-		(state) => state.movies.genresData
-	);
+	const genresData = useAppSelector((state) => state.movies.genresData);
 
-	const handleClick = (boolean: boolean) => {
-		return () => {
-			setOpenedOverview(boolean);
+	const toggleClick = (boolean: boolean) => {
+		setOpenedOverview(boolean);
 
-			if (boolean) {
-				document.body.style.overflow = 'hidden';
-			} else {
-				document.body.style.overflow = '';
-			}
-		};
+		if (boolean) {
+			document.body.style.overflow = 'hidden';
+		} else {
+			document.body.style.overflow = '';
+		}
 	};
 
-	const genres = genre_ids.map((num: number, i: number) => {
-		return genresData[num] ? genresData[num] + ' ' : '';
-	});
+	const genres = genre_ids.map((num: number) =>
+		genresData[num] ? genresData[num] + ' ' : ''
+	);
 
 	return (
 		<div className='movie'>
 			<MoviePreview
-				handleClick={handleClick}
+				toggleClick={toggleClick}
 				poster_path={poster_path}
 				title={title}
 				genres={genres}
@@ -59,7 +48,7 @@ const MovieCard = ({
 
 			{isOpenedOverview ? (
 				<MovieOverview
-					handleClick={handleClick}
+					toggleClick={toggleClick}
 					poster_path={poster_path}
 					backdrop_path={backdrop_path}
 					genre_ids={genre_ids}
@@ -70,8 +59,6 @@ const MovieCard = ({
 					vote_average={vote_average}
 					id={id}
 					first_air_date={first_air_date}
-					deleteMovie={deleteMovie}
-					page={page}
 				/>
 			) : null}
 		</div>

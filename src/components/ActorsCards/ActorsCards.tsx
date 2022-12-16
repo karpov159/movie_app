@@ -1,18 +1,11 @@
 import { useEffect } from 'react';
 import { store } from '../../core/store';
 import { useAppSelector, useAppDispatch } from '../../core/store';
-import {
-	selectAll,
-	fetchActors,
-	changeCurrentPage,
-} from '../../core/store/ActorsSlice';
+import { selectAll, fetchActors } from '../../core/store/ActorsSlice';
 import { useNavigate } from 'react-router-dom';
 import { BASE } from '../../core/config/RoutesConfig';
 import Error from '../../shared/Error/Error';
 import ActorCard from './ActorCard/ActorCard';
-import Typography from '../../shared/Typography/Typography';
-import Button from '../../shared/Button/Button';
-
 import Spinner from '../../shared/Spinner/Spinner';
 import ActorData from '../../shared/interfaces/actor.interface';
 import Headline from '../../shared/Headline/Headline';
