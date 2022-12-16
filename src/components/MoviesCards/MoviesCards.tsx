@@ -1,15 +1,14 @@
 import { useEffect } from 'react';
-import { fetchMovies, changeCurrentPage } from '../../core/store/MoviesSlice';
+import { fetchMovies } from '../../core/store/MoviesSlice';
 import { BASE_URL, API_KEY } from '../../helpers/constants';
 import { selectAll } from '../../core/store/MoviesSlice';
 import { store } from '../../core/store';
 import { useAppSelector, useAppDispatch } from '../../core/store';
 import MovieCard from './MovieCard/MovieCard';
 import Spinner from '../../shared/Spinner/Spinner';
-import Typography from '../../shared/Typography/Typography';
-import Button from '../../shared/Button/Button';
 import Error from '../../shared/Error/Error';
 import MovieData from '../../shared/interfaces/movie.interface';
+import Headline from '../../shared/Headline/Headline';
 
 interface ActiveGenre {
 	name: string;
@@ -50,23 +49,6 @@ const MoviesCards = ({ directory, title }: MoviesProps) => {
 		}
 	}, [dispatch, currentPage, directory, activeGenre, searchField]);
 
-	const clickNextPage = () => {
-		dispatch(changeCurrentPage(currentPage + 1));
-	};
-
-	const clickPreviousPage = () => {
-		dispatch(changeCurrentPage(currentPage - 1));
-	};
-
-	const previousButton =
-		currentPage > 1 ? (
-			<Button
-				handleClick={clickPreviousPage}
-				children='< Previous'
-				buttonClass='page-button page-button_mr'
-			/>
-		) : null;
-
 	const renderMovies = (allMovies: MovieData[]) => {
 		return allMovies.map((movie: MovieData) => {
 			return <MovieCard key={movie.id} {...movie} />;
@@ -82,23 +64,13 @@ const MoviesCards = ({ directory, title }: MoviesProps) => {
 
 	return (
 		<>
-			<div className='content-page__headline'>
-				<Typography component='h2' children={title} />
+			<Headline>{title}</Headline>
 
-				<div className='content-page__buttons'>
-					{previousButton}
-					<Button
-						handleClick={clickNextPage}
-						children='Next >'
-						buttonClass='page-button'
-					/>
-				</div>
-			</div>
 			{error}
 
-			<div className='content-page__movies'>{moviesCards}</div>
-
 			{spinner}
+
+			<div className='content-page__movies'>{moviesCards}</div>
 		</>
 	);
 };

@@ -51,7 +51,7 @@ const Genres = () => {
 
 	return (
 		<div className='genres'>
-			<Typography component='h2' children='All genres' />
+			<Typography component='h2'>All genres</Typography>
 
 			<div className='genres__list'>{genresButtons}</div>
 		</div>

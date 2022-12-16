@@ -1,5 +1,7 @@
 # Movie application
 
+-   Watch here - https://movie-app-sigma-vert.vercel.app/
+
 ## Features
 
 -   Search movies by name;

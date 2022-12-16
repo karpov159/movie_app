@@ -6,12 +6,6 @@
 	width: 100%;
 	border-left: $border-color;
 
-	&__headline {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-	}
-
 	&__movies {
 		margin-top: 20px;
 		display: grid;

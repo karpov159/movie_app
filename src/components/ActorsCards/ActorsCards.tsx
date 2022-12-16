@@ -15,6 +15,7 @@ import Button from '../../shared/Button/Button';
 
 import Spinner from '../../shared/Spinner/Spinner';
 import ActorData from '../../shared/interfaces/actor.interface';
+import Headline from '../../shared/Headline/Headline';
 
 interface ActorsProps {
 	directory: string;
@@ -47,23 +48,6 @@ const ActorsCards = ({ directory, title }: ActorsProps) => {
 		});
 	};
 
-	const clickNextPage = () => {
-		dispatch(changeCurrentPage(currentPage + 1));
-	};
-
-	const clickPreviousPage = () => {
-		dispatch(changeCurrentPage(currentPage - 1));
-	};
-
-	const previousButton =
-		currentPage > 1 ? (
-			<Button
-				handleClick={clickPreviousPage}
-				children='< Previous'
-				buttonClass='page-button page-button_mr'
-			/>
-		) : null;
-
 	const spinner = actorsLoadingStatus === 'loading' ? <Spinner /> : null;
 
 	const error = actorsLoadingStatus === 'error' ? <Error /> : null;
@@ -73,20 +57,10 @@ const ActorsCards = ({ directory, title }: ActorsProps) => {
 
 	return (
 		<>
-			<div className='content-page__headline'>
-				<Typography component='h2' children={title} />
+			<Headline>{title}</Headline>
 
-				<div className='content-page__buttons'>
-					{previousButton}
-
-					<Button
-						handleClick={clickNextPage}
-						children='Next >'
-						buttonClass='page-button'
-					/>
-				</div>
-			</div>
 			{error}
+
 			<div className='content-page__actors'>{actorsCards}</div>
 
 			{spinner}
