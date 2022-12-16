@@ -8,6 +8,7 @@ import type { PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '.';
 import { BASE_URL, API_KEY } from '../../helpers/constants';
 import httpRequest from '../../services/httpRequest';
+import MovieData from '../../shared/interfaces/movie.interface';
 
 interface MoviesSliceState {
 	moviesLoadingStatus: string;
@@ -21,9 +22,9 @@ interface MoviesSliceState {
 	searchField: string;
 }
 
-const moviesAdapter = createEntityAdapter();
+const moviesAdapter = createEntityAdapter<MovieData>();
 
-const initialState: EntityState<unknown> & MoviesSliceState =
+const initialState: EntityState<MovieData> & MoviesSliceState =
 	moviesAdapter.getInitialState({
 		moviesLoadingStatus: 'idle',
 		genresData: {},

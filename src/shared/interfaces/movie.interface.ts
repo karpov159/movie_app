@@ -1,4 +1,4 @@
-interface MovieInfo {
+interface MovieData {
 	backdrop_path: string;
 	poster_path: string;
 	title: string;
@@ -11,4 +11,4 @@ interface MovieInfo {
 	name?: string;
 }
 
-export default MovieInfo;
+export default MovieData;

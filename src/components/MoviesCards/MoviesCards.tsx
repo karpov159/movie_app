@@ -5,11 +5,11 @@ import { selectAll } from '../../core/store/MoviesSlice';
 import { store } from '../../core/store';
 import { useAppSelector, useAppDispatch } from '../../core/store';
 import MovieCard from './MovieCard/MovieCard';
-import MovieInfo from '../../shared/interfaces/movie.interface';
 import Spinner from '../../shared/Spinner/Spinner';
 import Typography from '../../shared/Typography/Typography';
 import Button from '../../shared/Button/Button';
 import Error from '../../shared/Error/Error';
+import MovieData from '../../shared/interfaces/movie.interface';
 
 interface ActiveGenre {
 	name: string;
@@ -67,8 +67,8 @@ const MoviesCards = ({ directory, title }: MoviesProps) => {
 			/>
 		) : null;
 
-	const renderMovies = (allMovies: any[]) => {
-		return allMovies.map((movie: MovieInfo) => {
+	const renderMovies = (allMovies: MovieData[]) => {
+		return allMovies.map((movie: MovieData) => {
 			return <MovieCard key={movie.id} {...movie} />;
 		});
 	};

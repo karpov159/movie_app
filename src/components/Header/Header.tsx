@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import {
 	BASE,
 	MOVIES,
@@ -14,7 +14,7 @@ import {
 	changeCurrentTab,
 	changeSearchField,
 } from '../../core/store/MoviesSlice';
-import { ChangeEvent } from 'react';
+import { ChangeEvent, useEffect } from 'react';
 
 import logo from '../../assets/logo.svg';
 import './Header.scss';
@@ -28,12 +28,19 @@ const Header = () => {
 	const dispatch = useAppDispatch();
 	const currentTab = useAppSelector((state) => state.movies.currentTab);
 	const searchField = useAppSelector((state) => state.movies.searchField);
+	const navigate = useNavigate();
 
-	const handleClick = (tabName: string) => {
+	useEffect(() => {
+		if (searchField) {
+			navigate(BASE.PATH);
+			dispatch(changeCurrentTab(''));
+		}
+	}, [dispatch, navigate, searchField]);
+
+	const handleClick = () => {
 		return (): void => {
 			dispatch(setActiveGenre({ name: '', num: null }));
 			dispatch(changeCurrentPage(1));
-			dispatch(changeCurrentTab(tabName));
 			dispatch(changeSearchField(''));
 		};
 	};
@@ -70,7 +77,7 @@ const Header = () => {
 
 			return (
 				<div key={tab.name} className={classes}>
-					<NavLink onClick={handleClick(tab.name)} end to={tab.path}>
+					<NavLink onClick={handleClick()} end to={tab.path}>
 						{tab.name}
 					</NavLink>
 				</div>
@@ -84,7 +91,7 @@ const Header = () => {
 		<header className='header'>
 			<NavLink
 				className='header__logo'
-				onClick={handleClick('')}
+				onClick={handleClick()}
 				end
 				to={BASE.PATH}>
 				<img src={logo} alt='logo' />
@@ -94,7 +101,7 @@ const Header = () => {
 
 			<div className='header__options'>
 				<div className='header__option header__option-search'>
-					<form className='form'>
+					<div>
 						<input
 							onChange={handleChange}
 							value={searchField}
@@ -103,10 +110,10 @@ const Header = () => {
 							placeholder='Search'
 						/>
 
-						<button type='submit' className='header__option-btn'>
+						<div className='header__option-icon'>
 							<SearchIcon />
-						</button>
-					</form>
+						</div>
+					</div>
 				</div>
 
 				<button className='header__option'>

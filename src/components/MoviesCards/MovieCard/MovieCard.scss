@@ -159,13 +159,20 @@
 			height: 100vh;
 			margin: 0 auto;
 			position: relative;
+			display: flex;
+			flex-direction: column;
 			background-color: #000;
 			z-index: 1;
 			overflow: auto;
+			padding-bottom: 30px;
 
 			&::-webkit-scrollbar {
 				display: none;
 			}
+		}
+
+		&-text {
+			padding: 0 10px;
 		}
 
 		&-title {
@@ -195,12 +202,12 @@
 		}
 
 		&-btns {
-			margin-top: 80px;
+			flex: 1 1 auto;
 			width: 270px;
 			display: flex;
 			justify-content: space-between;
-			text-align: center;
-			margin-bottom: 10px;
+			align-items: flex-end;
+			margin: 10px 0 0 10px;
 		}
 
 		&-play {

@@ -14,6 +14,7 @@ import Typography from '../../shared/Typography/Typography';
 import Button from '../../shared/Button/Button';
 
 import Spinner from '../../shared/Spinner/Spinner';
+import ActorData from '../../shared/interfaces/actor.interface';
 
 interface ActorsProps {
 	directory: string;
@@ -40,7 +41,7 @@ const ActorsCards = ({ directory, title }: ActorsProps) => {
 		dispatch(fetchActors(directory + currentPage));
 	}, [currentPage, dispatch, directory]);
 
-	const renderActors = (actors: any[]) => {
+	const renderActors = (actors: ActorData[]) => {
 		return actors.map((actor) => {
 			return <ActorCard key={actor.id} {...actor} />;
 		});

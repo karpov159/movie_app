@@ -7,15 +7,16 @@ import {
 import type { PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '.';
 import httpRequest from '../../services/httpRequest';
+import ActorData from '../../shared/interfaces/actor.interface';
 
 interface ActorsSliceState {
 	actorsLoadingStatus: string;
 	currentPage: number;
 }
 
-const actorsAdapter = createEntityAdapter();
+const actorsAdapter = createEntityAdapter<ActorData>();
 
-const initialState: EntityState<unknown> & ActorsSliceState =
+const initialState: EntityState<ActorData> & ActorsSliceState =
 	actorsAdapter.getInitialState({
 		actorsLoadingStatus: 'idle',
 		currentPage: 1,
